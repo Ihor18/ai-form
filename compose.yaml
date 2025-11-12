@@ -32,10 +32,9 @@ services:
             POSTGRES_DB: '${DB_DATABASE}'
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD}'
+            POSTGRES_HOST_AUTH_METHOD: trust
         volumes:
             - 'sail-pgsql:/var/lib/postgresql/data'
-            - './docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf'
-        command: postgres -c config_file=/etc/postgresql/postgresql.conf
         networks:
             - sail
         healthcheck:

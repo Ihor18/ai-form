@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actor Submission</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 <nav class="bg-white shadow-md mb-6">
@@ -16,14 +19,8 @@
 
 <main class="flex-grow">
     <div class="max-w-3xl mx-auto px-4">
-        @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
-
         @if ($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <div id="error-messages" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                 <ul class="list-disc pl-5">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -36,8 +33,5 @@
     </div>
 </main>
 
-<footer class="bg-white shadow-inner mt-6 py-4 text-center text-gray-500 text-sm">
-    Laravel Test Task © {{ date('Y') }}
-</footer>
 </body>
 </html>
