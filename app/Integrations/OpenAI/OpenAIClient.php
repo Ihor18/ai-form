@@ -15,7 +15,7 @@ class OpenAIClient implements OpenAIClientInterface
     public function extractActorData(string $description): array
     {
         $prompt = $this->getPrompt();
-        dd(config('services.openai.key'));
+
         $response = Http::withToken(config('services.openai.key'))
             ->post('https://api.openai.com/v1/chat/completions', [
                 'model'    => 'gpt-3.5-turbo',
@@ -26,7 +26,7 @@ class OpenAIClient implements OpenAIClientInterface
             ]);
 
         $content = $response->json('choices.0.message.content');
-        dd($response);
+
         if (!$content) {
             return [];
         }
