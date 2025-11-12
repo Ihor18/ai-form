@@ -22,7 +22,7 @@ class ActorService implements ActorServiceInterface
 
         $actorDTO = ActorData::fromArray($parsed);
 
-        if (!$actorDTO->firstName || !$actorDTO->lastName || !$actorDTO->address) {
+        if (!$actorDTO->name || !$actorDTO->surname || !$actorDTO->address) {
             return [
                 'success' => false,
                 'message' => 'Please add first name, last name, and address to your description.'

@@ -36,7 +36,7 @@
                 <tbody>
                 @foreach($actors as $actor)
                     <tr class="hover:bg-gray-50">
-                        <td class="py-2 px-4 border-b">{{ $actor->first_name }}</td>
+                        <td class="py-2 px-4 border-b">{{ $actor->name . ' '. $actor->surname }}</td>
                         <td class="py-2 px-4 border-b">{{ $actor->address }}</td>
                         <td class="py-2 px-4 border-b">{{ $actor->gender ?? '—' }}</td>
                         <td class="py-2 px-4 border-b">{{ $actor->height ?? '—' }}</td>
