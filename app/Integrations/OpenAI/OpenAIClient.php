@@ -26,12 +26,9 @@ class OpenAIClient implements OpenAIClientInterface
                 ]);
 
             if ($response->failed()) {
-                Log::error('OpenAI API error', [
-                    'status' => $response->status(),
-                    'body' => $response->body(),
-                ]);
-
-                throw new \RuntimeException('OpenAI API error: ' . $response->body());
+                throw new \RuntimeException(
+                    "OpenAI API error ({$response->status()}): " . $response->body()
+                );
             }
 
             $content = $response->json('choices.0.message.content');
@@ -49,9 +46,9 @@ class OpenAIClient implements OpenAIClientInterface
                 'trace' => $e->getTraceAsString(),
             ]);
 
-            // Fallback — не кидаємо exception далі, а повертаємо спеціальний сигнал
+
             return [
-                '__error' => 'OpenAI service unavailable',
+                '__error'   => 'OpenAI service unavailable',
                 '__message' => $e->getMessage(),
             ];
         }

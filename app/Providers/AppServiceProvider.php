@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         $this->app->bind(OpenAIClientInterface::class, function ($app) {
-            if ($app->environment('local', 'testing')) {
+            if ($app->environment('local')) {
                 return new FakeOpenAIClient();
             }
 
