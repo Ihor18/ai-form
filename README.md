@@ -21,7 +21,7 @@ Users can submit actor information, which is processed with OpenAI, saved to the
 - Start the application with Sail (`./vendor/bin/sail up -d`)
 - To test the API, set `APP_ENV=production` and add your OpenAI API key
 - Open `/docs/api` to explore the API with Laravel Scramble
-
+- Run `npm run dev` 
 ---
 
 ## Notes

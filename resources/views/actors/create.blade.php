@@ -5,6 +5,9 @@
         <h2 class="text-2xl font-semibold mb-4">Add Actor Information</h2>
 
         <form method="POST" id="actor-form" class="space-y-5">
+            <div id="error-messages" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 hidden">
+                <ul class="list-disc pl-5"></ul>
+            </div>
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input type="email" name="email" id="email" required value="{{ old('email') }}"

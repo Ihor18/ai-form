@@ -1,8 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('#actor-form');
+    const errorContainer = document.getElementById('error-messages');
+    const errorList = errorContainer.querySelector('ul');
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
+
+        errorContainer.classList.add('hidden');
+        errorList.innerHTML = '';
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
@@ -21,29 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
             const json = await response.json();
 
             if (!json.success) {
-                alert(json.message || 'Something went wrong!');
+                const li = document.createElement('li');
+                li.textContent = json.message || 'Something went wrong!';
+                errorList.appendChild(li);
+                errorContainer.classList.remove('hidden');
                 return;
             }
 
-            // редірект на сторінку index
             window.location.href = json.redirect;
 
         } catch (err) {
             console.error(err);
-            alert('Server error');
+            const li = document.createElement('li');
+            li.textContent = 'Server error';
+            errorList.appendChild(li);
+            errorContainer.classList.remove('hidden');
         }
     });
 });
-
-window.addEventListener('ajaxError', function(event) {
-    const errors = event.detail.errors;
-    const container = document.getElementById('error-messages');
-    container.innerHTML = '<ul class="list-disc pl-5"></ul>';
-    for (const msg of errors) {
-        const li = document.createElement('li');
-        li.textContent = msg;
-        container.querySelector('ul').appendChild(li);
-    }
-    container.style.display = 'block';
-});
-
